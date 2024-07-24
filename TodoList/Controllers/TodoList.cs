@@ -17,9 +17,10 @@ namespace TodoList.Controllers
         [HttpPost("Todo/Add")]
         public async Task<ActionResult<TodoEntity>> CreateTodo(TodoEntity dto)
         {
-            EntityEntry Todo = await dbContext.AddAsync(dto);
+            dto.ID = Guid.NewGuid();
+            EntityEntry Todo = await dbContext.AddAsync(dto); 
             await dbContext.SaveChangesAsync();
-            return Ok(Todo);
+            return Ok(await dbContext.SaveChangesAsync());
         }
         
         
@@ -41,11 +42,11 @@ namespace TodoList.Controllers
 
         // Update Function
         [HttpPost("Todo/Update/{id}")]
-        public async Task<ActionResult<UpdateModel>> UpdateTodo(UpdateModel  dto , Guid id)
+        public async Task<ActionResult<TodoEntity>> UpdateTodo(TodoEntity  dto , Guid id)
         {
             TodoEntity Todo = await dbContext.TodoList.FirstOrDefaultAsync(x => x.ID == id);
             if (Todo == null) return NotFound();
-            
+            Todo.ID = Guid.NewGuid();
             Todo.Title = dto.Title;
             Todo.Description = dto.Description;
 
