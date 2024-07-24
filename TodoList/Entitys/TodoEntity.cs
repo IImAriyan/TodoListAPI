@@ -7,9 +7,9 @@ namespace TodoList.Entitys;
 public class TodoEntity
 {
     [Key]
-    [Required]
+    [ScaffoldColumn(false)]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public Guid ID { get; set; } = new Guid();
+    public Guid ID { get; set; } = Guid.NewGuid();
 
     public string Title { get; set; }
 
