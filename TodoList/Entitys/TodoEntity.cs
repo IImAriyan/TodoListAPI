@@ -8,7 +8,8 @@ public class TodoEntity
 {
     [Key]
     [Required]
-    public Guid ID { get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public Guid ID { get; set; } = new Guid();
 
     public string Title { get; set; }
 
