@@ -56,15 +56,13 @@ namespace TodoList.Controllers
         }
         
         // Delete Function
-        [HttpDelete("Todo/Delete/{id}")]
-        public async Task<ActionResult<TodoEntity>> Delete(Guid id)
+        [HttpDelete("Todo/Delete")]
+        public async Task<ActionResult> Delete(Guid ID)
         {
-            TodoEntity Todo = await dbContext.TodoList.FirstOrDefaultAsync(x => x.ID == id);
+            TodoEntity Todo = await dbContext.TodoList.FirstOrDefaultAsync(x => x.ID == ID);
             if (Todo == null) return NotFound();
-
             dbContext.Remove(Todo);
-            dbContext.SaveChangesAsync();
-            
+            await dbContext.SaveChangesAsync();
             return Ok(Todo);
         }
     }
