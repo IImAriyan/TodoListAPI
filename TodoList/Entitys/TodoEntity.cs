@@ -12,6 +12,7 @@ public class TodoEntity
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [SwaggerIgnore]
+    [Required]
     public Guid ID { get; set; } = Guid.NewGuid();
     
     public string Title { get; set; }

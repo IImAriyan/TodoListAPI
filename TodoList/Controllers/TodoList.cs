@@ -46,7 +46,7 @@ namespace TodoList.Controllers
         {
             TodoEntity Todo = await dbContext.TodoList.FirstOrDefaultAsync(x => x.ID == id);
             if (Todo == null) return NotFound();
-            Todo.ID = Guid.NewGuid();
+            Todo.ID = id;
             Todo.Title = dto.Title;
             Todo.Description = dto.Description;
 
