@@ -15,7 +15,7 @@ namespace TodoList.Controllers
         
         // Add Function
         [HttpPost("Todo/Add")]
-        public async Task<ActionResult<UpdateModel>> CreateTodo(UpdateModel dto)
+        public async Task<ActionResult<TodoEntity>> CreateTodo(TodoEntity dto)
         {
             EntityEntry Todo = await dbContext.AddAsync(dto);
             await dbContext.SaveChangesAsync();
